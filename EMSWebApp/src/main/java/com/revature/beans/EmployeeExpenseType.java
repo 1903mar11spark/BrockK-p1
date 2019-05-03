@@ -1,6 +1,10 @@
 package com.revature.beans;
 
 import java.time.LocalDate;
+import java.util.Date;
+
+import com.revature.model.ExpenseStatus;
+
 import java.io.InputStream;
 import java.text.NumberFormat;
 
@@ -10,15 +14,18 @@ public class EmployeeExpenseType {
 	private int empId;
 	private String img;
 	private int apprMgrId;
-	private LocalDate expDt;
-	private long expAmt;
+	private Date expDt;
+	private double expAmt;
 	private String expName;
+	private ExpenseStatus status;
+	private Employee employee;
+	private ExpenseType expenseType;
 	
 	public EmployeeExpenseType() {
 		super();
 	}
 	
-	public EmployeeExpenseType(int expId, int empId, int apprMgrId, LocalDate expDt, long expAmt, String expName) {
+	public EmployeeExpenseType(int expId, int empId, int apprMgrId, Date expDt, double expAmt, String expName) {
 		super();
 		this.expId = expId;
 		this.empId = empId;
@@ -60,19 +67,19 @@ public class EmployeeExpenseType {
 		this.apprMgrId = apprMgrId;
 	}
 
-	public LocalDate getExpDt() {
+	public Date getExpDt() {
 		return expDt;
 	}
 
-	public void setExpDt(LocalDate expDt) {
+	public void setExpDt(Date expDt) {
 		this.expDt = expDt;
 	}
 
-	public long getExpAmt() {
+	public double getExpAmt() {
 		return expAmt;
 	}
 
-	public void setExpAmt(long expAmt) {
+	public void setExpAmt(double expAmt) {
 		this.expAmt = expAmt;
 	}
 
@@ -84,53 +91,32 @@ public class EmployeeExpenseType {
 		this.expName = expName;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + apprMgrId;
-		result = prime * result + empId;
-		result = prime * result + (int) (expAmt ^ (expAmt >>> 32));
-		result = prime * result + ((expDt == null) ? 0 : expDt.hashCode());
-		result = prime * result + expId;
-		result = prime * result + ((expName == null) ? 0 : expName.hashCode());
-		result = prime * result + ((img == null) ? 0 : img.hashCode());
-		return result;
+
+	
+	public ExpenseStatus getStatus() {
+		return status;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmployeeExpenseType other = (EmployeeExpenseType) obj;
-		if (apprMgrId != other.apprMgrId)
-			return false;
-		if (empId != other.empId)
-			return false;
-		if (expAmt != other.expAmt)
-			return false;
-		if (expDt == null) {
-			if (other.expDt != null)
-				return false;
-		} else if (!expDt.equals(other.expDt))
-			return false;
-		if (expId != other.expId)
-			return false;
-		if (expName == null) {
-			if (other.expName != null)
-				return false;
-		} else if (!expName.equals(other.expName))
-			return false;
-		if (img == null) {
-			if (other.img != null)
-				return false;
-		} else if (!img.equals(other.img))
-			return false;
-		return true;
+	public void setStatus(ExpenseStatus status) {
+		this.status = status;
+	}
+
+	
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public ExpenseType getExpenseType() {
+		return expenseType;
+	}
+
+	public void setExpenseType(ExpenseType expenseType) {
+		this.expenseType = expenseType;
 	}
 
 	@Override

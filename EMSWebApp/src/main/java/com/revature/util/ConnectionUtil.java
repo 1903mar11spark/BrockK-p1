@@ -12,9 +12,9 @@ public class ConnectionUtil {
 	// * * * do not ever hardcode credentials  * * *
 	
 	public static Connection getConnection() throws SQLException {
-		String url = "";
-		String username = "";
-		String pass = "";
+		String url = "jdbc:oracle:thin:@spark-1903mar11.c7dlwsqupbdr.us-east-2.rds.amazonaws.com:1521:orcl";
+		String username = "admin";
+		String pass = "Higgins75";
 		try {
 			   Class.forName("oracle.jdbc.driver.OracleDriver");
 			}
@@ -24,10 +24,17 @@ public class ConnectionUtil {
 		return DriverManager.getConnection(url, username, pass);
 	}
 
-	public static Connection getConnectionFromFile() throws SQLException, IOException {
+	public static Connection getConnectionFromFile2() throws SQLException, IOException {
+		//Properties prop = new Properties();
+		//InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream("connection.properties");
+		//prop.load(in);
+		
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		Properties prop = new Properties();
-		InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream("connection.properties");
-		prop.load(in);
+		try(InputStream resourceStream = loader.getResourceAsStream("src/main/resources/connection.properties")) {
+		    prop.load(resourceStream);
+		}
+		
 		try {
 			   Class.forName("oracle.jdbc.driver.OracleDriver");
 			}

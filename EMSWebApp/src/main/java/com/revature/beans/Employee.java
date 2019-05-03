@@ -1,7 +1,8 @@
 package com.revature.beans;
 
 public class Employee {
-	private int deptId;
+	
+	private int isManager;
 	private String fname;
 	private String lname;
 	private int mgrId;
@@ -11,7 +12,7 @@ public class Employee {
 	
 	public Employee(int deptId, String fname, String lname, int mgrId, String empEmail, int empId) {
 		super();
-		this.deptId = deptId;
+		this.isManager = deptId;
 		this.fname = fname;
 		this.lname = lname;
 		this.mgrId = mgrId;
@@ -29,7 +30,7 @@ public class Employee {
 	
 	public Employee(int deptId, String fname, String lname, int mgrId, String empEmail, int empId, String username, String pass) {
 		super();
-		this.deptId = deptId;
+		this.isManager = deptId;
 		this.fname = fname;
 		this.lname = lname;
 		this.mgrId = mgrId;
@@ -54,12 +55,17 @@ public class Employee {
 		this.pass = pass;
 	}
 
-	public int getDeptId() {
-		return deptId;
+	public boolean isManager() {
+		return isManager == 1;
 	}
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
+	public void setIsManager(boolean isMngr) {
+		if (isMngr) {
+			this.isManager = 1;
+		} else {
+			this.isManager = 0;
+		}
 	}
+	
 	public String getFname() {
 		return fname;
 	}
@@ -100,7 +106,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [Department ID: " + deptId + ", First Name: " + fname + ", Last Name: " + lname + ", Manager ID: " + mgrId
+		return "Employee [Department ID: " + isManager + ", First Name: " + fname + ", Last Name: " + lname + ", Manager ID: " + mgrId
 				+ ", Email: " + empEmail + ", Employee ID: " + empId + "]";
 	}
 
@@ -108,7 +114,7 @@ public class Employee {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + deptId;
+		result = prime * result + isManager;
 		result = prime * result + ((empEmail == null) ? 0 : empEmail.hashCode());
 		result = prime * result + empId;
 		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
@@ -117,49 +123,6 @@ public class Employee {
 		result = prime * result + ((pass == null) ? 0 : pass.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		if (deptId != other.deptId)
-			return false;
-		if (empEmail == null) {
-			if (other.empEmail != null)
-				return false;
-		} else if (!empEmail.equals(other.empEmail))
-			return false;
-		if (empId != other.empId)
-			return false;
-		if (fname == null) {
-			if (other.fname != null)
-				return false;
-		} else if (!fname.equals(other.fname))
-			return false;
-		if (lname == null) {
-			if (other.lname != null)
-				return false;
-		} else if (!lname.equals(other.lname))
-			return false;
-		if (mgrId != other.mgrId)
-			return false;
-		if (pass == null) {
-			if (other.pass != null)
-				return false;
-		} else if (!pass.equals(other.pass))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.beans.Employee;
 import com.revature.model.Credentials;
 import com.revature.model.User;
 import com.revature.service.AuthService;
@@ -24,7 +25,7 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("Login.html").forward(request, response);
+		request.getRequestDispatcher("login.html").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,21 +35,17 @@ public class LoginServlet extends HttpServlet {
 		//grab credentials from request
 		Credentials creds = new Credentials(request.getParameter("username"), request.getParameter("password"));
 		//attempt to authenticate user
-		User u = as.isValidUser(creds);
-		if (u != null) {
+		Employee empl = as.checkLogin(creds);
+		
+		if (empl != null) {
 			//set user information as session attributes (not request attributes!)
-			session.setAttribute("userId", u.getId());
-			session.setAttribute("username", u.getUsername());
-			session.setAttribute("fname", u.getFirstname());
-			session.setAttribute("lname", u.getLastname());
-			session.setAttribute("email", u.getEmail());
-			session.setAttribute("problem", null);
+			session.setAttribute("employee", empl);
 			//redirect user to profile page if authenticated
-			response.sendRedirect("P1EmpPg.html");
+			response.sendRedirect("employee");
 		} else {
 			session.setAttribute("problem", "invalid credentials");
 			//otherwise redirect to login page
-			response.sendRedirect("login");
+			response.sendRedirect("login.html");
 		}
 	}
 

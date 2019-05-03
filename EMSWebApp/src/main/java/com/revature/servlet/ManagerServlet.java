@@ -12,15 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.beans.*;
-import com.revature.dao.ManagerDao;
-import com.revature.dao.ManagerDaoImpl;
-
 
 public class ManagerServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8286526797657178044L;
 
 	// we will use this to convert Java objects to JSON-formatted data to include in
@@ -28,29 +23,26 @@ public class ManagerServlet extends HttpServlet {
 	private ObjectMapper om;
 
 	// this is our service class whose methods we will call
-	private ManagerDaoImpl managerDao;
-
-
 
 	// return all emps
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String idString = req.getParameter("id");
-		if (idString != null) {
-			try {
-				int id = Integer.parseInt(idString);
-				String bearJSON = om.writeValueAsString(managerDao.getAllEmployees());
-				if (bearJSON != null) {
-					resp.getWriter().write(bearJSON);
-				} else {
-					resp.sendError(404);
-				}
-			} catch (Exception e) {
-				resp.sendError(400);
-			}
-		} else {
-			resp.getWriter().write(om.writeValueAsString(managerDao.getAllEmployees()));
-		}
+////		String idString = req.getParameter("id");
+//		if (idString != null) {
+//			try {
+//				int id = Integer.parseInt(idString);
+//				String empsJSON = om.writeValueAsString(managerDao.getAllEmployees());
+//				if (empsJSON != null) {
+//					resp.getWriter().write(empsJSON);
+//				} else {
+//					resp.sendError(404);
+//				}
+//			} catch (Exception e) {
+//				resp.sendError(400);
+//			}
+//		} else {
+//			resp.getWriter().write(om.writeValueAsString(managerDao.getAllEmployees()));
+//		}
 	}
 	
 	@Override
@@ -61,20 +53,6 @@ public class ManagerServlet extends HttpServlet {
 //			resp.sendError(400);
 //		}
 	}
-
-
-
-	public ManagerDaoImpl getManagerDao() {
-		return managerDao;
-	}
-
-	public void setManagerDao(ManagerDaoImpl managerDao) {
-		this.managerDao = managerDao;
-	}
-	public ManagerServlet() {
-		setManagerDao(new ManagerDaoImpl());
-		om = new ObjectMapper();
-		om.registerModule(new JavaTimeModule());
-		om.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);
-	}
+	
+	
 }

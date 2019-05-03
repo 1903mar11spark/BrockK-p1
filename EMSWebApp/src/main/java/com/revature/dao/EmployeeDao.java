@@ -2,6 +2,13 @@ package com.revature.dao;
 import java.util.List;
 import com.revature.beans.*;
 import java.time.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import com.revature.util.ConnectionUtil;
+
 
 public interface EmployeeDao {
 	
@@ -16,4 +23,18 @@ public interface EmployeeDao {
 	public void expReq(int expId, int empId, double amt, LocalDate expDt, int apprMgrId);
 	
 	public void getExpenses(int empId);
+	
+	public void updateEmployee(Employee emp, String User);
+	public void createNewEmployee(int deptId, String fname, String lname, int mgrId, String username, String pass);
+
+	public void apprExp(Integer apprInt);
+	public void denyExp(Integer denyInt);
+	
+	public Employee getEmpById(int empId);
+	public Employee getEmp(String email);
+	
+	public List<Employee> getAllEmployees();
+	
+	public List<EmployeeExpenseType> getAllExpenses();
+	
 }
