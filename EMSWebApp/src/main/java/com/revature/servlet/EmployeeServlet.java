@@ -7,14 +7,10 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.beans.*;
 import com.revature.dao.EmployeeExpenseTypeDao;
 import com.revature.dao.EmployeeExpenseTypeDaoImpl;
@@ -58,7 +54,7 @@ public class EmployeeServlet extends HttpServlet {
 		doGet(request, response);
 		ServletResponse s = response;
 		PrintWriter out = response.getWriter();
-		//PrintWriter pw = new PrintWriter(s);
+
 	}
 
 }

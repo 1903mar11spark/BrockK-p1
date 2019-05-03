@@ -1,12 +1,9 @@
 package com.revature.beans;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 
 import com.revature.model.ExpenseStatus;
-
-import java.io.InputStream;
-import java.text.NumberFormat;
 
 public class EmployeeExpenseType {
 	
